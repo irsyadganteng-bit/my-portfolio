@@ -2,14 +2,15 @@
 
 import * as THREE from 'three';
 import { useRef, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useTexture, Text } from '@react-three/drei';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { Text } from '@react-three/drei';
 import dynamic from 'next/dynamic';
 
-function LanyardCard() {
+function CardContent() {
   const groupRef = useRef<THREE.Group>(null);
-  // Menggunakan photo.png sesuai file di folder public kamu
-  const texture = useTexture('/photo.png');
+  
+  // Menggunakan TextureLoader bawaan Three.js yang jauh lebih stabil
+  const texture = useLoader(THREE.TextureLoader, '/photo.png');
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -86,12 +87,12 @@ function LanyardCanvas() {
         <directionalLight position={[5, 5, 5]} intensity={2} />
         <pointLight position={[-5, -5, -5]} intensity={0.5} />
         <Suspense fallback={null}>
-          <LanyardCard />
+          <CardContent />
         </Suspense>
       </Canvas>
     </div>
   );
 }
 
-// Mematikan SSR secara total agar WebGL/Canvas tidak error saat dirender Next.js
+// Mematikan SSR secara penuh agar Canvas tidak crash saat prerender
 export default dynamic(() => Promise.resolve(LanyardCanvas), { ssr: false });
