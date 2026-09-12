@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt, FaCode, FaUser, FaBriefcase, FaExternalLinkAlt } from 'react-icons/fa';
+import { SiReact, SiNextdotjs, SiTailwindcss, SiTypescript, SiNodedotjs, SiGit, SiFigma } from 'react-icons/si';
 import Lanyard from '@/components/Lanyard';
 
 export default function Home() {
@@ -21,6 +22,17 @@ export default function Home() {
       link: "#",
       github: "#"
     }
+  ];
+
+  // Data Tech Stack dengan Icon dan Warna Efek
+  const techStack = [
+    { name: 'React', icon: SiReact, color: 'hover:border-cyan-400 hover:shadow-cyan-500/20 text-cyan-400' },
+    { name: 'Next.js', icon: SiNextdotjs, color: 'hover:border-white hover:shadow-white/20 text-white' },
+    { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'hover:border-sky-400 hover:shadow-sky-500/20 text-sky-400' },
+    { name: 'TypeScript', icon: SiTypescript, color: 'hover:border-blue-500 hover:shadow-blue-500/20 text-blue-500' },
+    { name: 'Node.js', icon: SiNodedotjs, color: 'hover:border-green-500 hover:shadow-green-500/20 text-green-500' },
+    { name: 'Git', icon: SiGit, color: 'hover:border-orange-500 hover:shadow-orange-500/20 text-orange-500' },
+    { name: 'Figma', icon: SiFigma, color: 'hover:border-pink-500 hover:shadow-pink-500/20 text-pink-500' },
   ];
 
   const fadeInUp = {
@@ -92,7 +104,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Skills Section */}
+      {/* Tech Stack / Skills Section */}
       <motion.section 
         id="skills"
         initial="hidden"
@@ -101,17 +113,21 @@ export default function Home() {
         variants={fadeInUp}
         className="w-full max-w-3xl space-y-6 z-10"
       >
-        <h2 className="text-2xl font-bold text-center">Tech Stack</h2>
-        <div className="flex flex-wrap justify-center gap-3">
-          {['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Node.js', 'Git', 'Figma'].map((skill) => (
-            <motion.span
-              key={skill}
-              whileHover={{ scale: 1.08 }}
-              className="px-4 py-2 bg-slate-900/80 border border-slate-800 rounded-xl text-sm text-slate-300 font-medium hover:border-blue-500/50 transition-colors"
-            >
-              {skill}
-            </motion.span>
-          ))}
+        <h2 className="text-2xl font-bold text-center">Tech Stack & Tools</h2>
+        <div className="flex flex-wrap justify-center gap-4">
+          {techStack.map((tech) => {
+            const Icon = tech.icon;
+            return (
+              <motion.div
+                key={tech.name}
+                whileHover={{ scale: 1.08, y: -4 }}
+                className={`flex items-center gap-2.5 px-5 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl text-sm font-medium transition-all shadow-lg backdrop-blur-md cursor-pointer ${tech.color}`}
+              >
+                <Icon size={18} />
+                <span className="text-slate-200">{tech.name}</span>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.section>
 
