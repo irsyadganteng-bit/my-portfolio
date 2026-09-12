@@ -7,16 +7,17 @@ import Lanyard from '@/components/Lanyard';
 export default function Home() {
   const projects = [
     {
-      title: "Website Portofolio Interaktif",
-      description: "Portofolio modern yang dibangun menggunakan Next.js dan Tailwind CSS dengan tema gelap.",
-      tech: ["Next.js", "Tailwind CSS", "TypeScript"],
+      title: "Generative AI Video Showcase",
+      description: "Project video berbasis kecerdasan buatan (AI) yang dirancang untuk konten visual interaktif dan kreatif.",
+      tech: ["AI Video Gen", "Prompt Engineering", "CapCut / Runway"],
+      video: "/video-ai.mp4", // Mengambil file video dari folder public/video-ai.mp4
       link: "#",
       github: "#"
     },
     {
-      title: "Aplikasi E-Commerce Minimalis",
-      description: "Platform toko online sederhana dengan fitur keranjang belanja dan tampilan responsif.",
-      tech: ["React", "Tailwind CSS", "Node.js"],
+      title: "Website Portofolio Interaktif",
+      description: "Portofolio modern yang dibangun menggunakan Next.js dan Tailwind CSS dengan tema gelap.",
+      tech: ["Next.js", "Tailwind CSS", "TypeScript"],
       link: "#",
       github: "#"
     }
@@ -129,9 +130,22 @@ export default function Home() {
             <motion.div 
               key={index}
               whileHover={{ y: -6 }}
-              className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between hover:border-slate-700 backdrop-blur-sm transition-all shadow-xl"
+              className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between hover:border-slate-700 backdrop-blur-sm transition-all shadow-xl overflow-hidden"
             >
               <div className="space-y-3">
+                {/* Menampilkan Pemutar Video jika properti 'video' ada */}
+                {project.video && (
+                  <div className="w-full h-44 rounded-xl overflow-hidden mb-4 bg-slate-950 border border-slate-800">
+                    <video 
+                      src={project.video} 
+                      controls 
+                      className="w-full h-full object-cover"
+                    >
+                      Browser kamu tidak mendukung tag video.
+                    </video>
+                  </div>
+                )}
+
                 <h3 className="text-xl font-semibold text-white">{project.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
