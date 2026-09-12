@@ -77,7 +77,7 @@ export default function Home() {
 
   // Data Statistik
   const stats = [
-    { icon: FaProjectDiagram, value: "5+", label: "Projects Completed" },
+    { icon: FaProjectDiagram, value: "3+", label: "Projects Completed" },
     { icon: FaAward, value: "1+ Thn", label: "Experience" },
     { icon: FaCode, value: "100%", label: "Responsive Design" },
   ];
