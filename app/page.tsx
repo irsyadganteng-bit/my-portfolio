@@ -46,7 +46,7 @@ export default function Home() {
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="text-center max-w-3xl space-y-6 pt-20 z-10 w-full"
+        className="text-center max-w-3xl space-y-4 pt-20 z-10 w-full flex flex-col items-center"
       >
         <div className="inline-block px-4 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20">
           Available for Hire
@@ -60,13 +60,13 @@ export default function Home() {
           Web Developer & Designer. Saya fokus membuat aplikasi web yang interaktif, cepat, dan responsif.
         </p>
 
-        {/* Lanyard 3D Card */}
-        <div className="w-full flex justify-center -my-4">
+        {/* Lanyard 3D Card Area */}
+        <div className="w-full flex justify-center -my-6 relative z-10">
           <Lanyard />
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 pt-2">
+        <div className="flex flex-wrap justify-center gap-4 relative z-20 pt-2">
           <a
             href="#contact"
             className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition-all shadow-lg shadow-blue-500/25 transform hover:scale-105"
@@ -75,6 +75,8 @@ export default function Home() {
           </a>
           <a
             href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-medium flex items-center gap-2 transition-all border border-slate-800 transform hover:scale-105"
           >
             <FaFileAlt size={18} /> Resume / CV
@@ -82,7 +84,7 @@ export default function Home() {
         </div>
 
         {/* Social Links */}
-        <div className="flex justify-center gap-6 pt-4 text-slate-400">
+        <div className="flex justify-center gap-6 pt-4 text-slate-400 relative z-20">
           <a href="#" className="hover:text-white transition-colors transform hover:scale-110"><FaGithub size={22} /></a>
           <a href="#" className="hover:text-white transition-colors transform hover:scale-110"><FaLinkedin size={22} /></a>
           <a href="#" className="hover:text-white transition-colors transform hover:scale-110"><FaEnvelope size={22} /></a>
