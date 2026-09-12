@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt, FaCode, FaUser, FaBriefcase, FaExternalLinkAlt } from 'react-icons/fa';
-import Lanyard from '../components/Lanyard';
+import Lanyard from '@/components/Lanyard';
 
 export default function Home() {
   const projects = [
