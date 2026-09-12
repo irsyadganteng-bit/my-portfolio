@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaGithub, 
   FaLinkedin, 
@@ -16,7 +16,9 @@ import {
   FaMagic,
   FaVideo,
   FaProjectDiagram,
-  FaAward
+  FaAward,
+  FaTimes,
+  FaArrowRight
 } from 'react-icons/fa';
 import { 
   SiReact, 
@@ -29,8 +31,24 @@ import {
 } from 'react-icons/si';
 import Lanyard from '@/components/Lanyard';
 
+// Definisi tipe data untuk Project Detail Modal
+interface Project {
+  title: string;
+  category: string;
+  description: string;
+  fullDescription: string;
+  problem: string;
+  features: string[];
+  tech: string[];
+  video?: string;
+  link: string;
+  github: string;
+}
+
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   const userEmail = "muhammadirsyad@example.com"; // Ganti dengan email aslimu
 
   const handleCopyEmail = () => {
@@ -39,19 +57,36 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const projects = [
+  // Data Projects yang telah dilengkapi detail untuk Modal
+  const projects: Project[] = [
     {
       title: "Generative AI Video Showcase",
+      category: "AI Video",
       description: "Project video berbasis kecerdasan buatan (AI) yang dirancang untuk konten visual interaktif, narasi dinamis, dan sinematik.",
-      tech: ["AI Video Gen", "Prompt Engineering", "CapCut / Runway"],
+      fullDescription: "Project eksperimental yang menggabungkan berbagai teknologi kecerdasan buatan untuk merancang konten sinematik. Menggunakan teknik prompt engineering tingkat lanjut untuk menghasilkan konsistensi karakter dan efek visual yang mulus.",
+      problem: "Proses pembuatan video tradisional memerlukan waktu produksi yang lama serta alokasi resources yang besar untuk rendering sinematik.",
+      features: [
+        "Penggenerasian karakter AI yang konsisten antar-scene",
+        "Pergerakan kamera sinematik (Pan, Zoom, Tracking)",
+        "Pascaproduksi dan penyelarasan audio visual menggunakan CapCut & Runway"
+      ],
+      tech: ["AI Video Gen", "Prompt Engineering", "CapCut", "Runway"],
       video: "/video-ai.mp4",
       link: "#",
       github: "#"
     },
     {
       title: "Website Portofolio Interaktif",
+      category: "Web Dev",
       description: "Portofolio modern berbasis web yang dibangun menggunakan Next.js, Tailwind CSS, serta efek 3D & animasi Framer Motion.",
-      tech: ["Next.js", "Tailwind CSS", "TypeScript", "Three.js"],
+      fullDescription: "Website portofolio pribadi modern dengan fokus pada performa cepat, aksesibilitas, serta integrasi visual 3D interaktif yang estetik.",
+      problem: "Portofolio statis konvensional sering kali kurang menarik perhatian audiens dan kurang fleksibel dalam menampilkan karya berbasis multimedia interaktif.",
+      features: [
+        "Integrasi komponen 3D interaktif (Lanyard)",
+        "Animasi UI dinamis & transisi modal menggunakan Framer Motion",
+        "Desain responsif optimal di semua ukuran layar (Mobile & Desktop)"
+      ],
+      tech: ["Next.js", "Tailwind CSS", "TypeScript", "Three.js", "Framer Motion"],
       link: "#",
       github: "#"
     }
@@ -95,7 +130,7 @@ export default function Home() {
       <div className="absolute top-[40%] right-0 w-[400px] h-[400px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Floating Navbar */}
-      <nav className="fixed top-6 z-50 bg-slate-900/80 backdrop-blur-md border border-slate-800 px-6 py-3 rounded-full flex items-center gap-6 text-slate-400 text-sm shadow-xl">
+      <nav className="fixed top-6 z-40 bg-slate-900/80 backdrop-blur-md border border-slate-800 px-6 py-3 rounded-full flex items-center gap-6 text-slate-400 text-sm shadow-xl">
         <a href="#about" className="hover:text-white flex items-center gap-2"><FaUser /> About</a>
         <a href="#skills" className="hover:text-white flex items-center gap-2"><FaCode /> Skills</a>
         <a href="#projects" className="hover:text-white flex items-center gap-2"><FaBriefcase /> Projects</a>
@@ -262,7 +297,7 @@ export default function Home() {
       >
         <div className="text-center space-y-1">
           <h2 className="text-2xl font-bold">Featured Projects</h2>
-          <p className="text-sm text-slate-400">Beberapa hasil karya terbaik yang pernah saya buat</p>
+          <p className="text-sm text-slate-400">Beberapa hasil karya terbaik yang pernah saya buat (Klik kartu untuk melihat detail)</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -270,15 +305,16 @@ export default function Home() {
             <motion.div 
               key={index}
               whileHover={{ y: -6 }}
-              className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between hover:border-slate-700 backdrop-blur-sm transition-all shadow-xl overflow-hidden"
+              onClick={() => setSelectedProject(project)}
+              className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between hover:border-blue-500/50 backdrop-blur-sm transition-all shadow-xl overflow-hidden cursor-pointer group"
             >
               <div className="space-y-3">
-                {/* Menampilkan Pemutar Video jika properti 'video' ada */}
                 {project.video && (
                   <div className="w-full h-44 rounded-xl overflow-hidden mb-4 bg-slate-950 border border-slate-800 relative group">
                     <video 
                       src={project.video} 
                       controls 
+                      onClick={(e) => e.stopPropagation()}
                       className="w-full h-full object-cover"
                     >
                       Browser kamu tidak mendukung tag video.
@@ -286,24 +322,36 @@ export default function Home() {
                   </div>
                 )}
 
-                <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                  <span className="text-[10px] px-2.5 py-0.5 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 font-medium">
+                    {project.category}
+                  </span>
+                </div>
+
                 <p className="text-slate-400 text-sm leading-relaxed">{project.description}</p>
+                
                 <div className="flex flex-wrap gap-2 pt-2">
                   {project.tech.map((t, idx) => (
-                    <span key={idx} className="text-xs bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-md border border-blue-500/20 font-medium">
+                    <span key={idx} className="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700 font-medium">
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="flex gap-4 pt-6 text-slate-400 text-sm border-t border-slate-800/50 mt-4">
-                <a href={project.github} className="flex items-center gap-1.5 hover:text-white transition-colors">
-                  <FaGithub size={16} /> Code
-                </a>
-                <a href={project.link} className="flex items-center gap-1.5 hover:text-white transition-colors">
-                  <FaExternalLinkAlt size={14} /> Demo
-                </a>
+              <div className="flex justify-between items-center pt-6 text-slate-400 text-sm border-t border-slate-800/50 mt-4">
+                <span className="text-xs text-blue-400 font-medium flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  Detail Proyek <FaArrowRight size={10} />
+                </span>
+                <div className="flex gap-3" onClick={(e) => e.stopPropagation()}>
+                  <a href={project.github} className="hover:text-white transition-colors" title="Source Code">
+                    <FaGithub size={16} />
+                  </a>
+                  <a href={project.link} className="hover:text-white transition-colors" title="Live Demo">
+                    <FaExternalLinkAlt size={14} />
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -358,6 +406,110 @@ export default function Home() {
           </button>
         </form>
       </motion.section>
+
+      {/* Modal Pop-up Detail Project */}
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+            
+            {/* Background Click Overlay */}
+            <div 
+              className="absolute inset-0" 
+              onClick={() => setSelectedProject(null)} 
+            />
+
+            {/* Content Box */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl z-10 space-y-6"
+            >
+              {/* Button Close (X) */}
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-5 right-5 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition-colors"
+              >
+                <FaTimes size={16} />
+              </button>
+
+              {/* Video Player Preview */}
+              {selectedProject.video && (
+                <div className="w-full h-64 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+                  <video src={selectedProject.video} controls className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              {/* Header Title & Category */}
+              <div>
+                <span className="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">
+                  {selectedProject.category}
+                </span>
+                <h2 className="text-2xl font-bold text-white mt-2">{selectedProject.title}</h2>
+              </div>
+
+              {/* Full Description */}
+              <div className="space-y-1.5">
+                <h4 className="text-sm font-semibold text-slate-300">Deskripsi Proyek</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">{selectedProject.fullDescription}</p>
+              </div>
+
+              {/* Problem & Background */}
+              {selectedProject.problem && (
+                <div className="space-y-1.5 bg-slate-950/50 p-4 rounded-xl border border-slate-800/80">
+                  <h4 className="text-sm font-semibold text-blue-400">Problem & Background</h4>
+                  <p className="text-slate-400 text-xs leading-relaxed">{selectedProject.problem}</p>
+                </div>
+              )}
+
+              {/* Key Features */}
+              {selectedProject.features && (
+                <div className="space-y-1.5">
+                  <h4 className="text-sm font-semibold text-slate-300">Fitur Utama</h4>
+                  <ul className="list-disc list-inside text-slate-400 text-xs space-y-1">
+                    {selectedProject.features.map((feat, idx) => (
+                      <li key={idx}>{feat}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Tech Badges */}
+              <div className="space-y-1.5">
+                <h4 className="text-sm font-semibold text-slate-300">Teknologi Digunakan</h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.tech.map((t, idx) => (
+                    <span key={idx} className="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-lg border border-slate-700">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 pt-4 border-t border-slate-800">
+                <a 
+                  href={selectedProject.link} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium text-center text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2"
+                >
+                  <FaExternalLinkAlt size={12} /> Live Demo
+                </a>
+                <a 
+                  href={selectedProject.github} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-medium text-center text-sm border border-slate-700 transition-all flex items-center justify-center gap-2"
+                >
+                  <FaGithub size={14} /> Source Code
+                </a>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </main>
   );
