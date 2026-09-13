@@ -57,7 +57,7 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Data Projects (Diperbarui dengan Flow AI)
+  // Data Projects
   const projects: Project[] = [
     {
       title: "Generative AI Video Showcase",
@@ -103,33 +103,11 @@ export default function Home() {
     { name: 'Figma', icon: SiFigma, color: 'hover:border-pink-500 hover:shadow-pink-500/20 text-pink-500' },
   ];
 
-  // AI & Creative Tools (Diperbarui dengan Flow AI)
+  // AI & Creative Tools
   const aiTools = [
     { name: 'Generative AI Video', desc: 'Text-to-Video & Image-to-Video Generation' },
     { name: 'Prompt Engineering', desc: 'Crafting precise prompts for optimal AI visual outputs' },
     { name: 'CapCut / Flow AI', desc: 'Video post-processing, tracking, & AI editing' },
-  ];
-
-  // What I Can Do / Services Data (Diperbarui dengan Flow AI)
-  const capabilities = [
-    {
-      title: "Web Development",
-      desc: "Membangun website responsif, modern, dan cepat menggunakan Next.js, React, dan Tailwind CSS dengan struktur kode yang rapi.",
-      icon: FaCode,
-      tags: ["Next.js", "React", "Tailwind"]
-    },
-    {
-      title: "AI Video & Content Creation",
-      desc: "Menghasilkan konten video sinematik dan visual interaktif berbasis Generative AI serta pengolahan audio-visual kreatif.",
-      icon: FaVideo,
-      tags: ["Flow AI", "CapCut", "Prompting"]
-    },
-    {
-      title: "UI/UX & Interactive Design",
-      desc: "Merancang antarmuka pengguna yang estetik, intuitif, dan dilengkapi animasi serta interaksi 3D yang memikat.",
-      icon: FaMagic,
-      tags: ["Figma", "Three.js", "Framer Motion"]
-    }
   ];
 
   // Data Statistik
@@ -247,57 +225,148 @@ export default function Home() {
         })}
       </motion.section>
 
-      {/* What I Can Do Section */}
+      {/* What I Can Do Section (Inspired by Video - 2 Column Layout) */}
       <motion.section 
         id="services"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeInUp}
-        className="w-full max-w-3xl space-y-6 z-10"
+        className="w-full max-w-4xl space-y-8 z-10"
       >
-        <div className="text-center space-y-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-semibold mb-2 border border-blue-500/20">
-            <FaMagic /> Services & Expertise
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold">What I Can Do</h2>
-          <p className="text-sm text-slate-400">Layanan dan keahlian utama yang dapat saya hadirkan untuk project Anda</p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Kolom Kiri: Header & Grid Icon Tools */}
+          <div className="lg:col-span-5 space-y-5">
+            <div className="space-y-2">
+              <span className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">
+                MY CAPABILITIES
+              </span>
+              <h2 className="text-3xl font-extrabold text-white">
+                What <span className="text-slate-400">I Can Do</span>
+              </h2>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Saya mengombinasikan keahlian teknis web development, pemecahan masalah, dan pembuatan konten Generative AI untuk membangun sistem web yang andal serta alur kerja digital yang efisien.
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {capabilities.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={idx}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between hover:border-blue-500/50 transition-all backdrop-blur-sm group shadow-lg"
-              >
-                <div className="space-y-3">
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                    <Icon size={22} />
+            {/* Grid Icon Tools */}
+            <div className="grid grid-cols-4 gap-2.5 pt-2">
+              {[
+                { icon: SiReact, name: "React", color: "text-cyan-400" },
+                { icon: SiNextdotjs, name: "Next.js", color: "text-white" },
+                { icon: SiTailwindcss, name: "Tailwind", color: "text-sky-400" },
+                { icon: SiTypescript, name: "TypeScript", color: "text-blue-500" },
+                { icon: SiNodedotjs, name: "Node.js", color: "text-green-500" },
+                { icon: SiGit, name: "Git", color: "text-orange-500" },
+                { icon: SiFigma, name: "Figma", color: "text-pink-500" },
+                { icon: FaVideo, name: "Flow AI", color: "text-purple-400" },
+              ].map((tool, idx) => {
+                const IconComponent = tool.icon;
+                return (
+                  <div 
+                    key={idx}
+                    title={tool.name}
+                    className="w-11 h-11 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-center hover:border-blue-500/50 hover:bg-slate-800 transition-all shadow-md group cursor-pointer"
+                  >
+                    <IconComponent className={`text-lg ${tool.color} group-hover:scale-110 transition-transform`} />
                   </div>
-                  <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-400 text-xs leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
+                );
+              })}
+            </div>
+          </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-4 mt-2 border-t border-slate-800/60">
-                  {item.tags.map((tag, tagIdx) => (
-                    <span 
-                      key={tagIdx}
-                      className="text-[10px] bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          {/* Kolom Kanan: Detail Capabilities Bernomor (01, 02) */}
+          <div className="lg:col-span-7 space-y-4">
+            
+            {/* Kartu 01: IT & Web Development */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl space-y-3.5 backdrop-blur-sm relative overflow-hidden group hover:border-blue-500/40 transition-all shadow-xl"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <span className="text-3xl font-extrabold text-slate-700 group-hover:text-blue-500/40 transition-colors">
+                    01
+                  </span>
+                  <div className="mt-1 inline-block px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg text-xs font-semibold text-slate-200">
+                    IT, WEB DEVELOPMENT & UI/UX
+                  </div>
                 </div>
-              </motion.div>
-            );
-          })}
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <FaCode size={18} />
+                </div>
+              </div>
+
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Membangun dan menguji sistem digital fungsional mulai dari arsitektur frontend web berbasis Next.js hingga desain antarmuka responsif yang fokus pada fungsionalitas dan keandalan.
+              </p>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {[
+                  "Web Development",
+                  "UI/UX Design",
+                  "Bug Identification",
+                  "Responsive Design",
+                  "Next.js",
+                  "React",
+                  "Tailwind CSS",
+                  "TypeScript"
+                ].map((tag, idx) => (
+                  <span 
+                    key={idx}
+                    className="text-[10px] bg-slate-950/70 border border-slate-800 text-slate-300 px-2.5 py-1 rounded-lg font-medium hover:border-slate-700 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Kartu 02: AI Video & Digital Operations */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl space-y-3.5 backdrop-blur-sm relative overflow-hidden group hover:border-cyan-500/40 transition-all shadow-xl"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <span className="text-3xl font-extrabold text-slate-700 group-hover:text-cyan-500/40 transition-colors">
+                    02
+                  </span>
+                  <div className="mt-1 inline-block px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg text-xs font-semibold text-slate-200">
+                    AI VIDEO & CREATIVE OPERATIONS
+                  </div>
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                  <FaVideo size={18} />
+                </div>
+              </div>
+
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Menghasilkan video visual sinematik berbasis kecerdasan buatan (Flow AI & CapCut) dan merancang alur konten multimedia interaktif secara efisien.
+              </p>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {[
+                  "Generative AI Video",
+                  "Prompt Engineering",
+                  "Flow AI",
+                  "CapCut Editing",
+                  "Content Optimization",
+                  "Media Production"
+                ].map((tag, idx) => (
+                  <span 
+                    key={idx}
+                    className="text-[10px] bg-slate-950/70 border border-slate-800 text-slate-300 px-2.5 py-1 rounded-lg font-medium hover:border-slate-700 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+          </div>
+
         </div>
       </motion.section>
 
