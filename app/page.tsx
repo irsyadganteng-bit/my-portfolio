@@ -123,19 +123,29 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center p-6 space-y-24 py-12 relative overflow-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center px-4 md:px-6 space-y-16 md:space-y-24 py-12 relative overflow-hidden">
       
       {/* Background Glow Effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-blue-600/15 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute top-[40%] right-0 w-[400px] h-[400px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[350px] md:w-[700px] h-[300px] md:h-[400px] bg-blue-600/15 blur-[100px] md:blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-[40%] right-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-cyan-500/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
 
-      {/* Floating Navbar */}
-      <nav className="fixed top-6 z-40 bg-slate-900/80 backdrop-blur-md border border-slate-800 px-6 py-3 rounded-full flex items-center gap-6 text-slate-400 text-sm shadow-xl">
-        <a href="#about" className="hover:text-white flex items-center gap-2"><FaUser /> About</a>
-        <a href="#services" className="hover:text-white flex items-center gap-2"><FaMagic /> What I Can Do</a>
-        <a href="#skills" className="hover:text-white flex items-center gap-2"><FaCode /> Skills</a>
-        <a href="#projects" className="hover:text-white flex items-center gap-2"><FaBriefcase /> Projects</a>
-        <a href="#contact" className="hover:text-white flex items-center gap-2"><FaEnvelope /> Contact</a>
+      {/* Floating Navbar (Mobile Responsive & Neat) */}
+      <nav className="fixed top-4 md:top-6 z-40 bg-slate-900/90 backdrop-blur-md border border-slate-800 px-3 sm:px-6 py-2.5 rounded-full flex items-center justify-center gap-2 sm:gap-6 text-slate-400 text-xs sm:text-sm shadow-xl max-w-[95%] sm:max-w-max overflow-x-auto">
+        <a href="#about" className="hover:text-white flex items-center gap-1.5 whitespace-nowrap px-1.5 py-1">
+          <FaUser className="text-xs sm:text-sm" /> <span>About</span>
+        </a>
+        <a href="#services" className="hover:text-white flex items-center gap-1.5 whitespace-nowrap px-1.5 py-1">
+          <FaMagic className="text-xs sm:text-sm" /> <span>What I Can Do</span>
+        </a>
+        <a href="#skills" className="hover:text-white flex items-center gap-1.5 whitespace-nowrap px-1.5 py-1">
+          <FaCode className="text-xs sm:text-sm" /> <span>Skills</span>
+        </a>
+        <a href="#projects" className="hover:text-white flex items-center gap-1.5 whitespace-nowrap px-1.5 py-1">
+          <FaBriefcase className="text-xs sm:text-sm" /> <span>Projects</span>
+        </a>
+        <a href="#contact" className="hover:text-white flex items-center gap-1.5 whitespace-nowrap px-1.5 py-1">
+          <FaEnvelope className="text-xs sm:text-sm" /> <span>Contact</span>
+        </a>
       </nav>
 
       {/* Hero Section */}
@@ -144,31 +154,31 @@ export default function Home() {
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="text-center max-w-3xl space-y-5 pt-20 z-10 w-full flex flex-col items-center"
+        className="text-center max-w-3xl space-y-5 pt-16 sm:pt-20 z-10 w-full flex flex-col items-center"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-xs sm:text-sm font-medium border border-blue-500/20">
           <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
           Available for Hire & Projects
         </div>
         
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
           Halo, Saya <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-300 bg-clip-text text-transparent">Muhammad Irsyad Alhafidz Riyadi</span>
         </h1>
         
-        <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed">
+        <p className="text-slate-400 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed px-2">
           Web Developer & AI Content Specialist. Saya menciptakan aplikasi web yang interaktif, cepat, serta pengalaman konten visual berbasis kecerdasan buatan.
         </p>
 
         {/* Lanyard 3D Card Area */}
-        <div className="w-full flex justify-center -my-6 relative z-10">
+        <div className="w-full flex justify-center -my-4 sm:-my-6 relative z-10">
           <Lanyard />
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 relative z-20 pt-2">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 relative z-20 pt-2 w-full px-2">
           <a
             href="#contact"
-            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition-all shadow-lg shadow-blue-500/25 transform hover:scale-105"
+            className="flex-1 sm:flex-none px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-all shadow-lg shadow-blue-500/25 text-center"
           >
             Hubungi Saya
           </a>
@@ -176,13 +186,13 @@ export default function Home() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-medium flex items-center gap-2 transition-all border border-slate-800 transform hover:scale-105"
+            className="flex-1 sm:flex-none px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-sm font-medium flex items-center justify-center gap-2 transition-all border border-slate-800"
           >
-            <FaFileAlt size={18} /> Resume / CV
+            <FaFileAlt size={16} /> Resume / CV
           </a>
           <button
             onClick={handleCopyEmail}
-            className="px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium flex items-center gap-2 transition-all border border-slate-800"
+            className="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-sm font-medium flex items-center justify-center gap-2 transition-all border border-slate-800"
             title="Salin Email"
           >
             {copied ? <FaCheck className="text-green-400" /> : <FaCopy />}
@@ -225,7 +235,7 @@ export default function Home() {
         })}
       </motion.section>
 
-      {/* What I Can Do Section (Inspired by Video - 2 Column Layout) */}
+      {/* What I Can Do Section */}
       <motion.section 
         id="services"
         initial="hidden"
@@ -381,19 +391,19 @@ export default function Home() {
       >
         <div className="text-center space-y-1">
           <h2 className="text-2xl font-bold">Tech Stack & Tools</h2>
-          <p className="text-sm text-slate-400">Teknologi yang saya gunakan untuk mengembangkan aplikasi web modern</p>
+          <p className="text-xs sm:text-sm text-slate-400">Teknologi yang saya gunakan untuk mengembangkan aplikasi web modern</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
           {techStack.map((tech) => {
             const Icon = tech.icon;
             return (
               <motion.div
                 key={tech.name}
-                whileHover={{ scale: 1.08, y: -4 }}
-                className={`flex items-center gap-2.5 px-5 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl text-sm font-medium transition-all shadow-lg backdrop-blur-md cursor-pointer ${tech.color}`}
+                whileHover={{ scale: 1.05, y: -2 }}
+                className={`flex items-center gap-2 px-4 py-2 bg-slate-900/80 border border-slate-800 rounded-xl text-xs sm:text-sm font-medium transition-all shadow-lg backdrop-blur-md cursor-pointer ${tech.color}`}
               >
-                <Icon size={18} />
+                <Icon size={16} />
                 <span className="text-slate-200">{tech.name}</span>
               </motion.div>
             );
@@ -416,7 +426,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold">AI Video & Media Capabilities</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {aiTools.map((item, idx) => (
             <div 
               key={idx}
@@ -443,7 +453,7 @@ export default function Home() {
       >
         <div className="text-center space-y-1">
           <h2 className="text-2xl font-bold">Featured Projects</h2>
-          <p className="text-sm text-slate-400">Beberapa hasil karya terbaik yang pernah saya buat (Klik kartu untuk melihat detail)</p>
+          <p className="text-xs sm:text-sm text-slate-400">Beberapa hasil karya terbaik yang pernah saya buat (Klik kartu untuk melihat detail)</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -452,11 +462,11 @@ export default function Home() {
               key={index}
               whileHover={{ y: -6 }}
               onClick={() => setSelectedProject(project)}
-              className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between hover:border-blue-500/50 backdrop-blur-sm transition-all shadow-xl overflow-hidden cursor-pointer group"
+              className="bg-slate-900/40 border border-slate-800/80 p-5 sm:p-6 rounded-2xl flex flex-col justify-between hover:border-blue-500/50 backdrop-blur-sm transition-all shadow-xl overflow-hidden cursor-pointer group"
             >
               <div className="space-y-3">
                 {project.video && (
-                  <div className="w-full h-44 rounded-xl overflow-hidden mb-4 bg-slate-950 border border-slate-800 relative group">
+                  <div className="w-full h-40 sm:h-44 rounded-xl overflow-hidden mb-4 bg-slate-950 border border-slate-800 relative group">
                     <video 
                       src={project.video} 
                       controls 
@@ -469,24 +479,24 @@ export default function Home() {
                 )}
 
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">{project.title}</h3>
                   <span className="text-[10px] px-2.5 py-0.5 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 font-medium">
                     {project.category}
                   </span>
                 </div>
 
-                <p className="text-slate-400 text-sm leading-relaxed">{project.description}</p>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{project.description}</p>
                 
-                <div className="flex flex-wrap gap-2 pt-2">
+                <div className="flex flex-wrap gap-1.5 pt-2">
                   {project.tech.map((t, idx) => (
-                    <span key={idx} className="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md border border-slate-700 font-medium">
+                    <span key={idx} className="text-[11px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 font-medium">
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="flex justify-between items-center pt-6 text-slate-400 text-sm border-t border-slate-800/50 mt-4">
+              <div className="flex justify-between items-center pt-5 text-slate-400 text-sm border-t border-slate-800/50 mt-4">
                 <span className="text-xs text-blue-400 font-medium flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                   Detail Proyek <FaArrowRight size={10} />
                 </span>
@@ -519,7 +529,7 @@ export default function Home() {
             <div className="absolute -left-[31px] top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-slate-950" />
             <span className="text-xs text-blue-400 font-semibold">2024 - PRESENT</span>
             <h3 className="text-lg font-bold text-white">Informatics Student</h3>
-            <p className="text-slate-400 text-sm">Fokus mempelajari pengembangan aplikasi web interaktif, AI, dan sistem perangkat lunak.</p>
+            <p className="text-slate-400 text-xs sm:text-sm">Fokus mempelajari pengembangan aplikasi web interaktif, AI, dan sistem perangkat lunak.</p>
           </div>
         </div>
       </motion.section>
@@ -531,7 +541,7 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeInUp}
-        className="w-full max-w-xl space-y-6 z-10 bg-slate-900/40 p-8 border border-slate-800 rounded-2xl backdrop-blur-sm shadow-xl"
+        className="w-full max-w-xl space-y-6 z-10 bg-slate-900/40 p-6 sm:p-8 border border-slate-800 rounded-2xl backdrop-blur-sm shadow-xl"
       >
         <h2 className="text-2xl font-bold text-center">Contact Me</h2>
         <form className="space-y-4">
@@ -569,19 +579,19 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl z-10 space-y-6"
+              className="relative bg-slate-900 border border-slate-800 rounded-3xl p-5 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl z-10 space-y-5"
             >
               {/* Button Close (X) */}
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition-colors"
+                className="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition-colors"
               >
                 <FaTimes size={16} />
               </button>
 
               {/* Video Player Preview */}
               {selectedProject.video && (
-                <div className="w-full h-64 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+                <div className="w-full h-48 sm:h-64 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
                   <video src={selectedProject.video} controls className="w-full h-full object-cover" />
                 </div>
               )}
@@ -591,19 +601,19 @@ export default function Home() {
                 <span className="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">
                   {selectedProject.category}
                 </span>
-                <h2 className="text-2xl font-bold text-white mt-2">{selectedProject.title}</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-white mt-2">{selectedProject.title}</h2>
               </div>
 
               {/* Full Description */}
               <div className="space-y-1.5">
-                <h4 className="text-sm font-semibold text-slate-300">Deskripsi Proyek</h4>
-                <p className="text-slate-400 text-sm leading-relaxed">{selectedProject.fullDescription}</p>
+                <h4 className="text-xs sm:text-sm font-semibold text-slate-300">Deskripsi Proyek</h4>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{selectedProject.fullDescription}</p>
               </div>
 
               {/* Problem & Background */}
               {selectedProject.problem && (
                 <div className="space-y-1.5 bg-slate-950/50 p-4 rounded-xl border border-slate-800/80">
-                  <h4 className="text-sm font-semibold text-blue-400">Problem & Background</h4>
+                  <h4 className="text-xs sm:text-sm font-semibold text-blue-400">Problem & Background</h4>
                   <p className="text-slate-400 text-xs leading-relaxed">{selectedProject.problem}</p>
                 </div>
               )}
@@ -611,7 +621,7 @@ export default function Home() {
               {/* Key Features */}
               {selectedProject.features && (
                 <div className="space-y-1.5">
-                  <h4 className="text-sm font-semibold text-slate-300">Fitur Utama</h4>
+                  <h4 className="text-xs sm:text-sm font-semibold text-slate-300">Fitur Utama</h4>
                   <ul className="list-disc list-inside text-slate-400 text-xs space-y-1">
                     {selectedProject.features.map((feat, idx) => (
                       <li key={idx}>{feat}</li>
@@ -622,7 +632,7 @@ export default function Home() {
 
               {/* Tech Badges */}
               <div className="space-y-1.5">
-                <h4 className="text-sm font-semibold text-slate-300">Teknologi Digunakan</h4>
+                <h4 className="text-xs sm:text-sm font-semibold text-slate-300">Teknologi Digunakan</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.tech.map((t, idx) => (
                     <span key={idx} className="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-lg border border-slate-700">
@@ -633,12 +643,12 @@ export default function Home() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 pt-4 border-t border-slate-800">
+              <div className="flex gap-3 pt-4 border-t border-slate-800">
                 <a 
                   href={selectedProject.link} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium text-center text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2"
+                  className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium text-center text-xs sm:text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2"
                 >
                   <FaExternalLinkAlt size={12} /> Live Demo
                 </a>
@@ -646,7 +656,7 @@ export default function Home() {
                   href={selectedProject.github} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-medium text-center text-sm border border-slate-700 transition-all flex items-center justify-center gap-2"
+                  className="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-medium text-center text-xs sm:text-sm border border-slate-700 transition-all flex items-center justify-center gap-2"
                 >
                   <FaGithub size={14} /> Source Code
                 </a>
