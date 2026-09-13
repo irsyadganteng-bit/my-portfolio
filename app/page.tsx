@@ -132,7 +132,7 @@ export default function Home() {
       {/* Floating Navbar */}
       <nav className="fixed top-6 z-40 bg-slate-900/80 backdrop-blur-md border border-slate-800 px-6 py-3 rounded-full flex items-center gap-6 text-slate-400 text-sm shadow-xl">
         <a href="#about" className="hover:text-white flex items-center gap-2"><FaUser /> About</a>
-        <a href="#services" className="hover:text-white flex items-center gap-2"><FaMagic /> Services</a>
+        <a href="#services" className="hover:text-white flex items-center gap-2"><FaMagic /> What I Can Do</a>
         <a href="#skills" className="hover:text-white flex items-center gap-2"><FaCode /> Skills</a>
         <a href="#projects" className="hover:text-white flex items-center gap-2"><FaBriefcase /> Projects</a>
         <a href="#contact" className="hover:text-white flex items-center gap-2"><FaEnvelope /> Contact</a>
