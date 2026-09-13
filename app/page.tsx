@@ -57,7 +57,7 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Data Projects yang telah dilengkapi detail untuk Modal
+  // Data Projects (Diperbarui dengan Flow AI)
   const projects: Project[] = [
     {
       title: "Generative AI Video Showcase",
@@ -68,9 +68,9 @@ export default function Home() {
       features: [
         "Penggenerasian karakter AI yang konsisten antar-scene",
         "Pergerakan kamera sinematik (Pan, Zoom, Tracking)",
-        "Pascaproduksi dan penyelarasan audio visual menggunakan CapCut & Runway"
+        "Pascaproduksi dan penyelarasan audio visual menggunakan CapCut & Flow AI"
       ],
-      tech: ["AI Video Gen", "Prompt Engineering", "CapCut", "Runway"],
+      tech: ["AI Video Gen", "Prompt Engineering", "CapCut", "Flow AI"],
       video: "/video-ai.mp4",
       link: "#",
       github: "#"
@@ -103,11 +103,33 @@ export default function Home() {
     { name: 'Figma', icon: SiFigma, color: 'hover:border-pink-500 hover:shadow-pink-500/20 text-pink-500' },
   ];
 
-  // AI & Creative Tools
+  // AI & Creative Tools (Diperbarui dengan Flow AI)
   const aiTools = [
     { name: 'Generative AI Video', desc: 'Text-to-Video & Image-to-Video Generation' },
     { name: 'Prompt Engineering', desc: 'Crafting precise prompts for optimal AI visual outputs' },
-    { name: 'CapCut / Runway', desc: 'Video post-processing, tracking, & editing' },
+    { name: 'CapCut / Flow AI', desc: 'Video post-processing, tracking, & AI editing' },
+  ];
+
+  // What I Can Do / Services Data (Diperbarui dengan Flow AI)
+  const capabilities = [
+    {
+      title: "Web Development",
+      desc: "Membangun website responsif, modern, dan cepat menggunakan Next.js, React, dan Tailwind CSS dengan struktur kode yang rapi.",
+      icon: FaCode,
+      tags: ["Next.js", "React", "Tailwind"]
+    },
+    {
+      title: "AI Video & Content Creation",
+      desc: "Menghasilkan konten video sinematik dan visual interaktif berbasis Generative AI serta pengolahan audio-visual kreatif.",
+      icon: FaVideo,
+      tags: ["Flow AI", "CapCut", "Prompting"]
+    },
+    {
+      title: "UI/UX & Interactive Design",
+      desc: "Merancang antarmuka pengguna yang estetik, intuitif, dan dilengkapi animasi serta interaksi 3D yang memikat.",
+      icon: FaMagic,
+      tags: ["Figma", "Three.js", "Framer Motion"]
+    }
   ];
 
   // Data Statistik
@@ -132,6 +154,7 @@ export default function Home() {
       {/* Floating Navbar */}
       <nav className="fixed top-6 z-40 bg-slate-900/80 backdrop-blur-md border border-slate-800 px-6 py-3 rounded-full flex items-center gap-6 text-slate-400 text-sm shadow-xl">
         <a href="#about" className="hover:text-white flex items-center gap-2"><FaUser /> About</a>
+        <a href="#services" className="hover:text-white flex items-center gap-2"><FaMagic /> Services</a>
         <a href="#skills" className="hover:text-white flex items-center gap-2"><FaCode /> Skills</a>
         <a href="#projects" className="hover:text-white flex items-center gap-2"><FaBriefcase /> Projects</a>
         <a href="#contact" className="hover:text-white flex items-center gap-2"><FaEnvelope /> Contact</a>
@@ -222,6 +245,60 @@ export default function Home() {
             </div>
           );
         })}
+      </motion.section>
+
+      {/* What I Can Do Section */}
+      <motion.section 
+        id="services"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        className="w-full max-w-3xl space-y-6 z-10"
+      >
+        <div className="text-center space-y-1">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-semibold mb-2 border border-blue-500/20">
+            <FaMagic /> Services & Expertise
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold">What I Can Do</h2>
+          <p className="text-sm text-slate-400">Layanan dan keahlian utama yang dapat saya hadirkan untuk project Anda</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {capabilities.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between hover:border-blue-500/50 transition-all backdrop-blur-sm group shadow-lg"
+              >
+                <div className="space-y-3">
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-4 mt-2 border-t border-slate-800/60">
+                  {item.tags.map((tag, tagIdx) => (
+                    <span 
+                      key={tagIdx}
+                      className="text-[10px] bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </motion.section>
 
       {/* Tech Stack & Tools Section */}
